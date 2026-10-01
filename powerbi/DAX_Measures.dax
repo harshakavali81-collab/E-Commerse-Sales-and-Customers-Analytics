@@ -1,0 +1,4 @@
+Net Revenue = SUM(order_details[revenue])
+Gross Profit = SUM(order_details[profit])
+Gross Margin % = DIVIDE([Gross Profit], [Net Revenue], 0) * 100
+Completed Orders = DISTINCTCOUNT(orders[order_id])
