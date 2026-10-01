@@ -1,11 +1,11 @@
 product_id,product_name,category,unit_price,unit_cost
-P001,Premium Smartphone Pro,Electronics,54999.0,38499.0
-P002,Ultrabook 14-inch,Electronics,72999.0,51099.0
-P003,Noise Canceling Headphones,Electronics,14999.0,9749.0
-P004,Smart Fitness Band,Electronics,3999.0,2399.0
-P005,Automatic Espresso Machine,Home & Kitchen,28499.0,18524.0
-P006,Digital Air Fryer 6L,Home & Kitchen,8999.0,5399.0
-P007,Ergonomic Office Chair,Office,16999.0,11049.0
-P008,Motorized Standing Desk,Office,24999.0,16249.0
-P009,Performance Trail Shoes,Apparel,5999.0,3599.0
-P010,Waterproof Trench Coat,Apparel,4499.0,2474.0
+P001,Premium Wireless Earbuds,Electronics,5499.0,3849.0
+P002,Smart Fitness Watch,Electronics,7999.0,5599.0
+P003,Mechanical Gaming Keyboard,Electronics,4499.0,3149.0
+P004,Ergonomic Desk Chair,Office,12499.0,8749.0
+P005,Compact Air Fryer,Home & Kitchen,6999.0,4899.0
+P006,Espresso Coffee Maker,Home & Kitchen,14999.0,10499.0
+P007,Running Performance Shoes,Apparel,3999.0,2799.0
+P008,Water-Resistant Backpack,Apparel,2499.0,1749.0
+P009,4K Ultra-HD Monitor 27in,Electronics,18999.0,13299.0
+P010,Minimalist Standing Desk,Office,15999.0,11199.0

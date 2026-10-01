@@ -1,0 +1,22 @@
+﻿{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Full E-Commerce Pipeline",
+            "type": "shell",
+            "command": "python run_project.py",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": true
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        }
+    ]
+}
