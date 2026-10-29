@@ -2,63 +2,54 @@
 
 A reproducible portfolio case study covering data quality, SQL, Python EDA, KPI definitions, customer RFM segmentation, retention cohorts, dashboards and business recommendations.
 
-**Synthetic data.** Generated with seed `20260930` for Jan 2024-Dec 2025. Currency: INR. This is not an analysis of a real company.
+[Setup](#local-installation--setup-guide) · [Architecture](#architecture--system-design-diagram) · [Detailed guide](PROJECT_GUIDE.md) · [Repository standard](docs/REPOSITORY_STANDARD.md)
 
-![Monthly revenue](outputs/charts/monthly_trend.png)
+## Visuals
 
-## Results
+A captured application screenshot or demo recording is not included yet. See the architecture section and checked-in documentation below.
 
-| KPI | Result |
-|---|---:|
-| Net revenue | INR 211,448,183.45 |
-| Gross profit | INR 63,272,309.05 |
-| Gross margin | 29.92% |
-| Completed orders with a valid line | 31,581 |
-| Purchasing customers | 5,376 |
-| Average order value | INR 6,695.42 |
-| Repeat customer rate | 80.04% |
-| Returned / shipped orders | 7.41% |
+## Live Link / Demo
 
-## Start immediately
+Download and open [dashboard_summary.html](outputs/dashboard_summary.html) for the supplied summary artifact. Run the Python entry point below for calculations; no Streamlit application is present in this checkout.
 
-1. Extract the ZIP completely. Open this folder in VS Code.
-2. Open `outputs/Ecommerce_Dashboard.html` in Chrome or Edge. It works offline, includes four views and supports year, region and category filters. No Python is needed for this view.
-3. Read `outputs/Ecommerce_Final_Report.pdf` and open `outputs/Ecommerce_Analytics.xlsx`.
-4. For Power BI, follow `powerbi/README.md`. The project source is supplied; a native Desktop refresh and visual check remain required.
+## Key Features
 
-## Reproduce in Python
+- Pandas joins over customers, products, orders and line items.
+- Completed-order revenue, profit, margin and average-order-value calculations.
+- Quantile-based RFM customer segmentation and CSV export.
+- SQL schema and analytics queries, DAX measures and a summary HTML artifact.
+
+## Tech Stack
+
+![Python](https://img.shields.io/badge/Python-334155?style=flat-square) ![Pandas](https://img.shields.io/badge/Pandas-334155?style=flat-square) ![NumPy](https://img.shields.io/badge/NumPy-334155?style=flat-square) ![SQL](https://img.shields.io/badge/SQL-334155?style=flat-square)
+
+Dependency versions and optional packages are defined in the repository manifests.
+
+## Architecture / System Design Diagram
+
+Source layout and component inventory (asset not present in this checkout). A runtime architecture diagram remains a follow-up task.
+
+## Local Installation & Setup Guide
+
+```bash
+git clone https://github.com/harshakavali81-collab/E-Commerse-Sales-and-Customers-Analytics.git
+cd E-Commerse-Sales-and-Customers-Analytics
+```
+
+Requires Python with venv support. Run from the repository root:
 
 ```bash
 python -m venv .venv
-# Windows PowerShell:
-.venv\Scripts\Activate.ps1
+# Windows PowerShell: .venv\Scripts\Activate.ps1
 # macOS/Linux: source .venv/bin/activate
-pip install -r requirements.txt
-python src/pipeline.py
-python src/build_deliverables.py
-python -m unittest discover -s tests
-streamlit run app.py
+python -m pip install -r requirements.txt
+python run_project.py
+python -m pytest -q
 ```
 
-The supplied outputs already exist. Pipeline execution regenerates the same raw data with the fixed seed and overwrites its analytics outputs. `build_deliverables.py` rebuilds HTML/PDF/docs/notebook. Excel is a supplied snapshot with linked ratio formulas; refresh Excel by replacing its input tables from the new CSV outputs. The workbook builder used for the supplied snapshot is not a public Python dependency.
+The runner reads the checked-in CSVs and overwrites `outputs/rfm_customer_segments.csv`. The current test checks a row-count invariant; broader financial reconciliation tests remain future work. Older guide commands referring to `src/pipeline.py`, `app.py`, or `src/build_deliverables.py` do not match this checkout.
 
-## Project contents
-
-| Location | Contents |
-|---|---|
-| `data/raw/` | Original customers, products, orders and dirty order lines |
-| `data/processed/` | Clean tables, flattened fact sales, RFM and date dimension |
-| `src/pipeline.py` | Synthetic generator, cleaning, EDA, segmentation, SQL execution and checks |
-| `sql/` | SQLite views plus 14 analytical queries |
-| `notebooks/analysis.ipynb` | Runnable SQL and Python analysis notebook |
-| `app.py` | Interactive Streamlit dashboard with four tabs |
-| `powerbi/` | Editable native project source, semantic model, DAX and setup guide |
-| `outputs/` | Offline dashboard, Excel, PDF, SQLite database, query results and seven charts |
-| `docs/` | Definitions, data dictionary, findings, interview notes and GitHub guide |
-| `tests/` | Four tests checking accounting semantics, cohorts, rates and recency |
-| `.github/workflows/` | Automated pipeline and validation on push/PR |
-
-## Data quality and accounting
+## Challenges & Solutions
 
 Raw lines: 72,388; duplicate line IDs removed: 100; quarantined invalid lines: 60; retained lines: 72,228. One missing category becomes Unknown. Price/discount/quantity are captured at transaction time, not read from the current product price.
 
@@ -68,16 +59,39 @@ Revenue is not operating profit. Distinct monthly customers and orders cannot ge
 
 RFM segments are fixed full-history business rules as of 1 Jan 2026. The dashboard's repeat rate is recomputed within its filters. Cohort charts in Streamlit are explicitly full-history references. High discounts correlate with lower margin in the simulated data; they do not prove causation.
 
-## Validation
+## Future Improvements
 
-SQL/Python revenue and gross profit reconcile within INR 0.01; completed order counts, monthly totals and segment revenue reconcile. Four business tests pass. GitHub CI reproduces the pipeline. Power BI Desktop and Excel's native desktop engine have not been exercised in this environment.
+- Capture a reproducible end-to-end demo with runtime versions and sample inputs.
+- Expand regression checks for invalid inputs and documented edge cases.
+- Record measured results, data provenance and deployment limitations alongside each release.
 
-## GitHub
+## Scope and supporting evidence
 
-Repository: https://github.com/harshakavali81-collab/E-Commerse-Sales-and-Customers-Analytics
+A reproducible portfolio case study covering data quality, SQL, Python EDA, KPI definitions, customer RFM segmentation, retention cohorts, dashboards and business recommendations.
 
-All source, synthetic datasets, report outputs and a CI workflow are included. See `docs/GITHUB_SETUP.md` for local Git commands.
+**Synthetic data.** Generated with seed `20260930` for Jan 2024-Dec 2025. Currency: INR. This is not an analysis of a real company.
+
+Monthly revenue (asset not present in this checkout)
+
+## Repository Structure
+
+| Location | Purpose |
+| --- | --- |
+| `src/` | Source modules |
+| `tests/` | Tests |
+| `docs/` | Documentation |
+| `data/` | Data and samples |
+| `sql/` | SQL schema and analysis |
+| `powerbi/` | Power BI build assets |
+| `.github/` | Issue forms, PR template and automated checks |
+
+[Complete file inventory and workflow](docs/REPOSITORY_STANDARD.md). Runtime entry points retain their existing paths.
+
+## Workflow & Tracking
+
+Use the [bug and feature forms](https://github.com/harshakavali81-collab/E-Commerse-Sales-and-Customers-Analytics/issues/new/choose) to define work with acceptance criteria. Keep tasks in Todo → In progress → Review → Done, and link a pull request with `Closes #<number>`. See [the maintenance workflow](docs/REPOSITORY_STANDARD.md#workflow).
 
 ## License
 
-MIT for code and generated synthetic data. See LICENSE. Microsoft documentation and JSON schema references retain their original terms.
+Original project software is available under the [MIT License](LICENSE). See [licensing scope](docs/LICENSING.md) for third-party and data exclusions.
+
